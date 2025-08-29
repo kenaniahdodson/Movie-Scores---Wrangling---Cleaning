@@ -1,0 +1,150 @@
+---
+title: "Lab 03 Notes"
+output: html_document
+date: "2025-02-03"
+---
+
+# grep() find a word or phrase string
+# grepl() find a word or phrase logical vector
+# regexpr() find part of a word or phrase
+# agrep() find an approximate match
+# sub() replace the first occurence of a word or phrase
+# gsub() replace all occurances
+# paste() combine multiple strings into a single string
+# strsplit() split one string into multiple strings
+# substr() extract part of the string
+
+```{r}
+
+# Load library
+library(tidyverse)
+library(stringi)
+
+```
+
+
+```{r}
+
+df <- read.csv("https://query.data.world/s/rr46ndg7fyne54q7oonmvzxbaxg3zn", header=TRUE, stringsAsFactors=FALSE)
+
+colnames(df)
+
+```
+
+
+```{r}
+
+grep("Kenny", df$Director, value=TRUE, ignore.case = TRUE)
+
+```
+
+
+```{r}
+
+grep("Kenny", df$Writer, value=TRUE, ignore.case = TRUE)
+
+
+```
+
+
+```{r}
+
+grep("Kenny", df$Actors, value=TRUE, ignore.case = TRUE)
+
+```
+
+
+```{r}
+
+paste(grep("Kenny", df$Actors, value=TRUE, ignore.case=TRUE), collapse=', ')
+
+```
+```{r}
+
+kenny_cast <- paste(grep("Kenny", df$Actors, value=TRUE, ignore.case=TRUE), collapse=', ') %>% str_split(", ")
+
+kenny_cast
+
+```
+
+
+```{r}
+
+kenny_cast <- kenny_cast %>% unlist()
+kenny_cast
+
+```
+
+
+```{r}
+
+kenny_actors <- grep("Kenny", kenny_cast, value=TRUE, ignore.case=TRUE) %>% unique()
+kenny_actors
+
+```
+
+
+```{r}
+
+grep("^Kenny", kenny_actors, value=TRUE, ignore.case=TRUE)
+
+
+```
+
+```{r}
+
+grep("Kenny$", kenny_actors, value=TRUE, ignore.case=TRUE)
+
+
+```
+
+
+```{r}
+
+df$Actors %>% str_split(", ") %>% unlist() %>% str_trim() %>% unique()
+
+```
+
+
+```{r}
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
